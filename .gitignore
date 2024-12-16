@@ -1,5 +1,6 @@
 nlparam/nlparam_env/
 nlparam/requirements.txt
+nlparam/embedding_cache/
 
 __pycache__/
 *.pyc
