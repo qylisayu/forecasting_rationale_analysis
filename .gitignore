@@ -1,2 +1,7 @@
 nlparam/nlparam_env/
 nlparam/requirements.txt
+
+__pycache__/
+*.pyc
+logs/
+wandb/
