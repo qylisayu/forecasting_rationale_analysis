@@ -7,7 +7,6 @@ from copy import deepcopy
 import random
 import numpy as np
 from dataclasses import dataclass
-import wandb
 
 
 @dataclass
@@ -157,7 +156,7 @@ class AbstractModel:
         self.post_init()
 
     @staticmethod
-    def reorder_texts(texts, reference_phi_denotation=None, labels=None):
+    def reorder_texts(texts, reference_phi_denotation=None, labels=None, scores=None):
         sorted_idx_based_on_text = np.argsort(texts)
         texts = np.array(texts)[sorted_idx_based_on_text].tolist()
 
@@ -169,7 +168,11 @@ class AbstractModel:
                 sorted_idx_based_on_text
             ]
 
-        return texts, reference_phi_denotation, labels
+        # Reorder scores if provided
+        if scores is not None:
+            scores = np.array(scores)[sorted_idx_based_on_text].tolist()
+
+        return texts, reference_phi_denotation, labels, scores
 
     def post_init(self):
         # compute other statistics that might be used
@@ -386,8 +389,6 @@ class AbstractModel:
             current_loss = self.compute_fitness_from_phi_denotation(
                 self.phi_predicate_denotation
             )
-            wandb.log({"iteration": iteration, "loss": current_loss})
-
             logger.debug(
                 f"Iteration {iteration}, current loss {current_loss}, current predicate strings {self.phi_predicate_strings}"
             )

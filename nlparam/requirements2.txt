@@ -1,0 +1,17 @@
+--extra-index-url https://download.pytorch.org/whl/cu116
+torch == 1.12.1+cu116
+torchvision == 0.13.1+cu116
+torchaudio == 0.12.1
+openai == 1.55.3
+transformers == 4.30.2
+scipy
+numpy == 1.26.4
+tqdm
+sentence_transformers
+scikit-learn
+dataclasses-json
+tf-keras
+httpx == 0.27.2
+huggingface_hub==0.14.1
+tensorflow[and-cuda]
+wandb
